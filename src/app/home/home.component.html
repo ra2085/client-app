@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-10">
+    <ngb-accordion #acc="ngbAccordion">
+      <ng-container *ngIf="isAuthenticated">
+        <ngb-panel *ngFor="let account of accountData$; index as i;">
+          <ng-template ngbPanelTitle>
+            <table>
+              <tbody>
+                <tr>
+                  <td><span><b>{{ account.brandName }}&nbsp;&nbsp;</b></span></td>
+                  <td><span>{{ account.accountId }}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>Available Balance</td>
+                  <td>{{ account.balance.availableAmount.amount }}&nbsp;{{ account.balance.availableAmount.currency }}</td>
+                </tr>
+                <tr>
+                  <td>Auto Invest</td>
+                  <td>{{ account.balance.automaticallyInvestedAmount.amount }}&nbsp;{{ account.balance.automaticallyInvestedAmount.currency }}</td>
+                </tr>
+                <tr>
+                  <td>Blocked Balance</td>
+                  <td>{{ account.balance.blockedAmount.amount }}&nbsp;{{ account.balance.blockedAmount.currency }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-panel>
+      </ng-container>
+      <ngb-panel *ngIf="isAuthenticated" title="User Info">
+        <ng-template ngbPanelContent>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Attribute</th>
+                <th scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Subject</td>
+                <td>{{ (userData$ | async)?.userData.sub }}</td>
+              </tr>
+              <tr>
+                <td>Name</td>
+                <td>{{ (userData$ | async)?.userData.name }}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>{{ (userData$ | async)?.userData.email }}</td>
+              </tr>
+              <tr>
+                <td>Locale</td>
+                <td>{{ (userData$ | async)?.userData.locale }}</td>
+              </tr>
+              <tr>
+                <td>Zone Info</td>
+                <td>{{ (userData$ | async)?.userData.zoneinfo }}</td>
+              </tr>
+              <tr>
+                <td>Preferred Username</td>
+                <td>{{ (userData$ | async)?.userData.preferred_username }}</td>
+              </tr>
+              <tr>
+                <td>Given Name</td>
+                <td>{{ (userData$ | async)?.userData.given_name }}</td>
+              </tr>
+              <tr>
+                <td>Family Name</td>
+                <td>{{ (userData$ | async)?.userData.family_name }}</td>
+              </tr>
+              <tr>
+                <td>Email Verified</td>
+                <td>{{ (userData$ | async)?.userData.email_verified }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel title="OIDC Configuration">
+        <ng-template ngbPanelContent>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Attribute</th>
+                <th scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Authority</td>
+                <td style="word-break: break-word;">{{ (configuration$ | async)?.authority }}</td>
+              </tr>
+              <tr>
+                <td>Auth Wellknown JWKS Endpoint</td>
+                <td style="word-break: break-word;">{{ (configuration$ | async)?.authWellknownEndpoints?.jwksUri }}</td>
+              </tr>
+              <tr>
+                <td>Auth Wellknown Authorization Endpoint</td>
+                <td style="word-break: break-word;">{{ (configuration$ | async)?.authWellknownEndpoints?.authorizationEndpoint }}</td>
+              </tr>
+              <tr>
+                <td>Auth Wellknown Token Endpoint</td>
+                <td style="word-break: break-word;">{{ (configuration$ | async)?.authWellknownEndpoints?.tokenEndpoint }}</td>
+              </tr>
+              <tr>
+                <td>Auth Wellknown User Info Endpoint</td>
+                <td style="word-break: break-word;">{{ (configuration$ | async)?.authWellknownEndpoints?.userInfoEndpoint }}</td>
+              </tr>
+              <tr>
+                <td>Auth Wellknown End Session Endpoint</td>
+                <td style="word-break: break-word;">{{ (configuration$ | async)?.authWellknownEndpoints?.endSessionEndpoint }}</td>
+              </tr>
+              <tr>
+                <td>Redirect URL</td>
+                <td style="word-break: break-word;">{{ (configuration$ | async)?.redirectUrl }}</td>
+              </tr>
+              <tr>
+                <td>Client ID</td>
+                <td style="word-break: break-word;">{{ (configuration$ | async)?.clientId }}</td>
+              </tr>
+              <tr>
+                <td>Response Type</td>
+                <td>{{ (configuration$ | async)?.responseType }}</td>
+              </tr>
+              <tr>
+                <td>Scope</td>
+                <td>{{ (configuration$ | async)?.scope }}</td>
+              </tr>
+              <tr>
+                <td>Post Logout Redirect URI</td>
+                <td>{{ (configuration$ | async)?.postLogoutRedirectUri }}</td>
+              </tr>
+              <tr>
+                <td>Post Login Route</td>
+                <td>{{ (configuration$ | async)?.postLoginRoute }}</td>
+              </tr>
+              <tr>
+                <td>Audience</td>
+                <td>{{ (configuration$ | async)?.customParamsAuthRequest?.['audience'] }}</td>
+              </tr>
+              <tr>
+                <td>Scope</td>
+                <td>{{ (configuration$ | async)?.customParamsAuthRequest?.['scope'] }}</td>
+              </tr>
+              <tr>
+                <td>Refresh Token TTL</td>
+                <td>{{ (configuration$ | async)?.tokenRefreshInSeconds }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

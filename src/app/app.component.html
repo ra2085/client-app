@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand me-2" [routerLink]="'.'">
+            <img src="/assets/Fintech.png" height="50"
+            alt=""
+            loading="lazy"
+            style="margin-top: -1px; margin-right: 10px;" />
+        </a>
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+        &#9776;
+    </button>
+  
+      <div *ngIf="isAuthenticated; else noAuth" [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item active">
+                <a class="nav-link active" [routerLink]="'.'" (click)="isMenuCollapsed = true">Home</a>
+            </li>
+        </ul>
+        <button type="button" class="btn btn-primary me-3" (click)="logoutLocal()">
+            Logout Local
+        </button>
+        <button type="button" class="btn btn-primary me-3" (click)="logoffAndRevokeTokens()">
+            Logout Local & Session
+        </button>
+        <button type="button" class="btn btn-primary me-3" (click)="refreshSession()">
+            Refresh Token
+        </button>
+      </div>
+      <ng-template #noAuth>
+        <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto"></ul>
+            <button type="button" class="btn btn-primary me-3" (click)="login()">
+                Login
+            </button>
+        </div>
+    </ng-template>
+    </div>
+</nav>
+<router-outlet></router-outlet>
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+      <!-- Copyright -->
+      <div class="text-center text-dark p-3" style="background-color: rgba(246, 247, 249, 0.2);">
+        © 2022 Copyright:
+        <a class="text-dark" href="https://fintech.cymbal.com">Cymbal Group</a>
+      </div>
+      <!-- Copyright -->
+</footer>
